@@ -1,4 +1,8 @@
-from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Post
 
 def index(request):
-    return HttpResponse('hello world, this is my first post')
+    posts = Post.objects.all()
+    context = {"posts": posts}
+    return render(request, "posts/index.html",context)
+
