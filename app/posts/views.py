@@ -1,5 +1,5 @@
 from logging import debug
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Post
@@ -51,3 +51,12 @@ def update(request, slug):
             return HttpResponseRedirect(reverse('post-detail', kwargs={'slug': post.slug}))
         
         return render(request, 'posts/update.html', {'form': form, 'post': post})
+
+def delete(request, slug):
+    post = get_object_or_404(Post,slug=slug)
+
+    if request.method == 'POST':
+        post.delete()
+        return redirect(reverse(index))
+    
+    return redirect(reverse('post-detail', kwargs={'slug': post.slug}))
