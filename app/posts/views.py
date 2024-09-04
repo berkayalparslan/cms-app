@@ -1,5 +1,8 @@
 from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from .models import Post
+from .forms import PostForm
 
 def index(request):
     posts = Post.objects.all()
@@ -11,3 +14,17 @@ def detail(request, slug):
     context = {'post': post}
     return render(request, "posts/detail.html",context)
 
+def create(request):
+    if request.method == 'GET':
+        form = PostForm()
+        return render(request, 'posts/create.html', {'form': form})
+    
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+
+        if form.is_valid():
+            post = Post()
+            post.title = form.cleaned_data['title']
+            post.content = form.cleaned_data['content']
+            post.save()
+            return HttpResponseRedirect(reverse('index'))

@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from datetime import datetime
 
 # Create your models here.
 class Post(models.Model):
@@ -10,8 +11,10 @@ class Post(models.Model):
     slug = models.SlugField(null=True, unique=True)
 
     def save(self, *args, **kwargs):
+        self.publish_date = datetime.now()
         if not self.slug:
-            self.slug = slugify(self.title)
+            timestamp = datetime.timestamp(self.publish_date)
+            self.slug = slugify(self.title + '-'+ str(timestamp))
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:

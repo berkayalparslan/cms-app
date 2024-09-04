@@ -1,4 +1,6 @@
-{% extends "../base.html" %} {% block content %} {% if posts %}
+{% extends "../base.html" %} {% block content %}
+<a href="{% url 'post-create' %}" class="btn btn-primary">Add new post</a>
+ {% if posts %}
 <ul>
   {% for post in posts %}
   <li>
