@@ -1,9 +1,9 @@
-{% if posts %}
+{% extends "../base.html" %} {% block content %} {% if posts %}
 <ul>
   {% for post in posts %}
   <li>
-    <h2><a href="{% url 'post-detail' slug=post.slug %}">{{ post.title }}</a>
-
+    <h2>
+      <a href="{% url 'post-detail' slug=post.slug %}">{{ post.title }}</a>
     </h2>
     <i>Published at {{ post.publish_date }}</i>
     <p>{{post.content }}</p>
@@ -12,4 +12,4 @@
 </ul>
 {% else %}
 <p>No posts have been posted yet.</p>
-{% endif %}
+{% endif %} {% endblock %}
