@@ -1,4 +1,5 @@
-<div>
+{% extends "../base.html" %} {% block content %}
+  <a href="{% url 'post-update' slug=post.slug %}" class="btn btn-primary">Update post</a>
     <h2>{{ post.title }}</h2>
     <p>{{ post.content }}</p>
-  </div>
+  {% endblock %}

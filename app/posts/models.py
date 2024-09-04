@@ -13,7 +13,7 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         self.publish_date = datetime.now()
         if not self.slug:
-            timestamp = datetime.timestamp(self.publish_date)
+            timestamp = int(datetime.timestamp(self.publish_date))
             self.slug = slugify(self.title + '-'+ str(timestamp))
         super().save(*args, **kwargs)
 
