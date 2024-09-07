@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Post
@@ -14,6 +15,7 @@ def detail(request, slug):
     context = {'post': post}
     return render(request, "posts/detail.html",context)
 
+@login_required
 def create(request):
     if request.method == 'GET':
         form = PostForm()
