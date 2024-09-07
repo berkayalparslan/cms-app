@@ -9,7 +9,7 @@
     <h2>
       <a href="{% url 'post-detail' slug=post.slug %}">{{ post.title }}</a>
     </h2>
-    <i>Published at {{ post.publish_date }}</i>
+    <i>Published by <b>{{ post.user.username }}</b> at {{ post.publish_date }}</i>
     <p>{{post.content }}</p>
   </li>
   {% endfor %}
