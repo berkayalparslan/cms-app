@@ -28,8 +28,9 @@
             </li>
           </ul>
           <span class="me-5">
-            {% if user.is_authenticated %}
             <ul class="navbar-nav me-auto mb-2 mb-lg-2">
+            {% if user.is_authenticated %}
+            
               <li class="nav-item"><a class="nav-link disabled">Hello, <b>{{user.username}}</b></a></li>
               <li class="nav-item dropdown">
                 <a
@@ -54,10 +55,13 @@
                   </a>
                 </div>
               </li>
-            </ul>
+            
             {% else %}
-            <a href="{% url 'login' %}"> Login </a>
+            
+            <a class="nav-link" href="{% url 'login' %}"> Login </a>
+            <a class="nav-link" href="{% url 'register' %}"> Register </a>
             {% endif %}
+          </ul>
           </span>
         </div>
       </div>
