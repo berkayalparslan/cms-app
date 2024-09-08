@@ -1,7 +1,9 @@
 {% extends "../base.html" %} {% block content %}
+{% if user.is_authenticated %}
 <a href="{% url 'post-update' slug=post.slug %}" class="btn btn-primary"
   >Update post</a
 >
+
 <button
   type="button"
   class="btn btn-danger"
@@ -10,6 +12,7 @@
 >
   Delete post
 </button>
+{% endif %}
 <h2>{{ post.title }}</h2>
 <p>{{ post.content }}</p>
 

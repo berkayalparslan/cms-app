@@ -1,13 +1,15 @@
 {% extends "../base.html" %} {% block content %}
+{% if user.is_authenticated %}
 <a href="{% url 'post-create' %}" class="btn btn-primary">Add new post</a>
- {% if posts %}
+{% endif %} 
+{% if posts %}
 <ul>
   {% for post in posts %}
   <li>
     <h2>
       <a href="{% url 'post-detail' slug=post.slug %}">{{ post.title }}</a>
     </h2>
-    <i>Published at {{ post.publish_date }}</i>
+    <i>Published by <b>{{ post.user.username }}</b> at {{ post.publish_date }}</i>
     <p>{{post.content }}</p>
   </li>
   {% endfor %}

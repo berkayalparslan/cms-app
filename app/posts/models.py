@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from datetime import datetime
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Post(models.Model):
@@ -9,6 +10,7 @@ class Post(models.Model):
     content = models.CharField(max_length=1000)
     publish_date = models.DateTimeField("publish date")
     slug = models.SlugField(null=True, unique=True)
+    user = models.ForeignKey(User,null=True, on_delete=models.CASCADE, related_name='posts')
 
     def save(self, *args, **kwargs):
         self.publish_date = datetime.now()
