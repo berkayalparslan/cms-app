@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Post
-from .forms import PostForm
+from .forms import CommentForm, PostForm
 
 def index(request):
     posts = Post.objects.all()
@@ -12,7 +12,23 @@ def index(request):
 
 def detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    context = {'post': post}
+    comments = post.comments.all()
+
+    if request.method == 'POST':
+        if request.user.is_authenticated == False:
+            return redirect('login')
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.user = request.user
+            comment.save()
+            return redirect('post-detail',slug=slug)
+    else:
+        form = CommentForm()
+        
+    context = {'post': post, 'comments': comments, 'form': form}
     return render(request, "posts/detail.html",context)
 
 @login_required
