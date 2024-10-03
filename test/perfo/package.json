@@ -1,0 +1,14 @@
+{
+  "name": "perfo",
+  "version": "1.0.0",
+  "main": "run-tests.js",
+  "scripts": {
+    "test": "node run-tests.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
