@@ -8,6 +8,13 @@ services:
     env_file: .env
     networks:
       - cms-app
+  memcached:
+    image: memcached:1.6
+    container_name: memcached
+    ports:
+      - "11211:11211"
+    networks:
+      - cms-app  
   web:
     build: 
       context: .
@@ -19,9 +26,11 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     depends_on:
       - postgresql
+      - memcached
     networks:
       - cms-app
     env_file: .env
+
 
 volumes:
   postgres_data:

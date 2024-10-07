@@ -3,3 +3,4 @@ django-bootstrap-v5
 django-silk
 psycopg2-binary
 python-dotenv
+pymemcache

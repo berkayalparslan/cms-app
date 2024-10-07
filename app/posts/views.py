@@ -4,7 +4,9 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Post
 from .forms import CommentForm, PostForm
+from django.views.decorators.cache import cache_page
 
+@cache_page(3600)
 def index(request):
     posts = Post.objects.all()
     context = {"posts": posts}
